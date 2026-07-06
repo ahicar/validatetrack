@@ -1,0 +1,23 @@
+{
+  "name": "validatetrack-backend",
+  "version": "1.0.0",
+  "description": "Serverless backed for ValidateTrack - Equipment Qualification & Deviation Tracker",
+  "main": "index.js",
+  "scripts": {
+    "test": "jest --coverage",
+    "test:watch": "jest --watch"
+  },
+  "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.600.0",
+    "@aws-sdk/lib-dynamodb": "^3.600.0",
+    "uuid": "^9.0.1"
+  },
+  "devDependencies": {
+    "aws-sdk-client-mock": "^4.0.1",
+    "jest": "^30.4.2"
+  },
+  "keywords": ["Validation", "Equipment"],
+  "author": "ahicar cruz & claude",
+  "license": "ISC",
+  "type": "commonjs"
+}
