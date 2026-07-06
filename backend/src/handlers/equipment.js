@@ -7,7 +7,7 @@ const{
     DeleteCommand,
 } = require('@aws-sdk/lib-dynamodb');
 const { v4: uuidv4 } = require('uuid');
-const { response } =require('../utils/response');
+const { response } = require('../utils/response');
 const { validateEquipment, computeEquipmentStatus } = require('../utils/validators');
 
 const client = new DynamoDBClient({});
@@ -23,13 +23,13 @@ async function handler(event) {
             case 'GET':
                 return id ? await getOne(id) : await getAll();
             case 'POST':
-                return await createImageBitmap(JSON.parse(event.body || '{}'));
+                return await create(JSON.parse(event.body || '{}'));
             case 'PUT':
-                return await PaymentRequestUpdateEvent(id, JSON.parse(event.body || '{}'));
+                return await update(id, JSON.parse(event.body || '{}'));
             case 'DELETE':
                 return await remove(id);
             default:
-                return response(405, { message: 'Method ${httpMethod} not allowed' });               
+                return response(405, { message: `Method ${httpMethod} not allowed` });               
         }
     } catch (err) {
         console.error('Unhandled error', err);
@@ -42,9 +42,9 @@ async function getAll() {
     return response(200, result.Items || []);    
 }
 
-aync function getOne(id) {
-    const result = await docClient.send(new GetCommand ({ TableName: TABLE_NAME, key: { id } }));
-    if (!result.item) return response(404, {message: 'Equipment not found' });
+async function getOne(id) {
+    const result = await docClient.send(new GetCommand ({ TableName: TABLE_NAME, Key: { id } }));
+    if (!result.Item) return response(404, {message: 'Equipment not found' });
     return response(200, result.Item);
 }
 
@@ -58,29 +58,29 @@ async function create(data) {
         location: data.location,
         lastCalibrationDate: data.lastCalibrationDate,
         nextDueDate: data.nextDueDate,
-        status: computeEquipmentStatus(data.nexDueDate),
+        status: computeEquipmentStatus(data.nextDueDate),
         createdAt: new Date().toISOString(),
     };
 
-    await docClient.send(new PutCommand({ TableName: TABLE_NAME, item: item }));
+    await docClient.send(new PutCommand({ TableName: TABLE_NAME, Item: item }));
     return response(201, item);
 }
 
 async function update(id, data) {
-    const existing = await docClient.send(new GetCommand({ TableName: TABLE_NAME, key: { id } }));
-    if (!existing.Item) return response(404 { message: 'Equipment not found' });
+    const existing = await docClient.send(new GetCommand({ TableName: TABLE_NAME, Key: { id } }));
+    if (!existing.Item) return response(404, { message: 'Equipment not found' });
 
     const { isValid, errors} = validateEquipment(data);
-    if (!isValid) return response(400, { message: 'VAlidation failed', errors });
+    if (!isValid) return response(400, { message: 'Validation failed', errors });
 
     const updated = {
         ...existing.Item,
         name: data.name,
         location: data.location,
         lastCalibrationDate: data.lastCalibrationDate,
-        nexDueDate: data.nexDueDate,
-        status: computeEquipmentStatus(data.nexDueDate),
-        updatedAT: new Date().toISOString(),
+        nextDueDate: data.nextDueDate,
+        status: computeEquipmentStatus(data.nextDueDate),
+        updatedAt: new Date().toISOString(),
     };
 
     await docClient.send(new PutCommand({ TableName: TABLE_NAME, Item: updated }));
