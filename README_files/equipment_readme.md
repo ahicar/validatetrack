@@ -9,7 +9,6 @@ This module contains an AWS Lambda handler designed to manage equipment records 
 - [API Endpoints](#api-endpoints)
 - [Code Structure & Functions](#code-structure--functions)
 - [Environment Variables](#environment-variables)
-- [Important Code Corrections & Review Notes](#important-code-corrections--review-notes)
 
 ---
 
