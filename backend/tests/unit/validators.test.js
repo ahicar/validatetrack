@@ -27,6 +27,12 @@ describe('validateEquipment', () => {
         const { isValid, errors } = validateEquipment({ ...validEquipment, nextDueDate: 'not-a-date' });
         expect(isValid).toBe(false);
     });
+
+    test('rejects an invalid equipment status', () => {
+        const { isValid, errors } = validateEquipment({ ...validEquipment, status: 'Invalid' });
+        expect(isValid).toBe(false);
+        expect(errors).toContain('status must be one of: Qualified, Due Soon, Overdue');
+    });
 });
 
 describe ('computeEquipmentStatus', () => {
@@ -78,5 +84,11 @@ describe ('validateDeviation', () => {
     test('accepts a valid status', () => {
         const { isValid, errors } = validateDeviation({ ...validDeviation, status: 'Under Review'});
         expect(isValid).toBe(true);
+    });
+
+    test('rejects an invalid deviation status', () => {
+        const { isValid, errors } = validateDeviation({ ...validDeviation, status: 'Invalid' });
+        expect(isValid).toBe(false);
+        expect(errors).toContain('status must be one of: Open, Under Review, Closed');
     });
 });
