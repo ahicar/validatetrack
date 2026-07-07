@@ -27,8 +27,18 @@ jobs:
           cd frontend
           npm run build
 
+      - name: Inspect build output
+        run: |
+          echo "Node version: $(node -v)"
+          ls -la frontend || true
+          ls -la frontend/dist || true
+
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v3
         with:
           github_token: ${{ secrets.GITHUB_TOKEN }}
           publish_dir: ./frontend/dist
+          publish_branch: gh-pages
+          user_name: github-actions[bot]
+          user_email: 41898282+github-actions[bot]@users.noreply.github.com
+          allow_empty_commit: true
