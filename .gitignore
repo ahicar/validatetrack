@@ -10,6 +10,10 @@ build/
 .env
 .env.local
 *.podspec.lock
+node_modules/
+dist/
+.env
+.aws-sam/
 
 # System Files
 .DS_Store
