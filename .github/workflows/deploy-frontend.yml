@@ -16,6 +16,7 @@ jobs:
         uses: actions/setup-node@v4
         with:
           node-version: '24'
+          cache: 'npm'
 
       - name: Install dependencies
         run: |
@@ -35,6 +36,8 @@ jobs:
 
       - name: Configure GitHub Pages
         uses: actions/configure-pages@v3
+        with:
+          enablement: true
 
       - name: Upload artifact for GitHub Pages (actions/upload-artifact v4)
         uses: actions/upload-artifact@v4
