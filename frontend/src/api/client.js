@@ -21,6 +21,6 @@ export const api = {
     createEquipment: (data) => request('/equipment', { method: 'POST', body: JSON.stringify(data) }),
     deleteEquipment:  (id) => request(`/equipment/${id}`, { method: 'DELETE' }),
     getDeviations: () => request('/deviations'),
-    createDeviation: (data) => request('/deviations', {methods: 'POST', body: JSON.stringify(data) }),
+    createDeviation: (data) => request('/deviations', { method: 'POST', body: JSON.stringify(data) }),
     deleteDeviation: (id) => request(`/deviations/${id}`, { method: 'DELETE' }),
 }
