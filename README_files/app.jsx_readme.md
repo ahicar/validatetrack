@@ -4,7 +4,7 @@ A React application for managing and tracking equipment calibration status and s
 
 ---
 
-## 📋 Table of Contents
+## Table of Contents
 
 - [Features](#features)
 - [Technical Stack](#technical-stack)
