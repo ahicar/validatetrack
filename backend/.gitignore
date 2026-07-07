@@ -1,0 +1,10 @@
+# AWS SAM build directory
+.aws-sam/
+
+# SAM CLI configuration
+samconfig.toml
+
+# Local environment variables
+.env
+
+node_modules/
