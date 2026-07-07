@@ -1,26 +1,43 @@
 # ValidateTrack
 
-A serverless full-stack app for tracking equipment qualification/calibration status and
-deviations (non-conformances) — the exact kind of record-keeping CIQA Engineering's clients
-(FDA-regulated pharma, biotech, and medical device companies) rely on for cGMP compliance.
+## What does it do?
+ValidateTrack is a small full-stack application for tracking equipment calibration status and deviations. It lets users record equipment, view its current status, and manage related quality issues in a simple workflow.
 
-Built to demonstrate the stack listed in CIQA's Junior Full Stack Developer & Testing Analyst
-posting: JavaScript (ES6+), Node.js, React, AWS Lambda/S3/DynamoDB, Jest, Cypress, Git.
+## Why this domain?
+This domain matters because equipment qualification and deviation tracking are core parts of regulated environments such as pharmaceutical and medical device manufacturing. Good records help teams maintain compliance, reduce risk, and respond quickly when equipment issues arise.
 
-## Local deployment
+## What tech did you use, and why does each piece matter?
+- React + Vite: provides the user interface and a fast local development experience.
+- Node.js and AWS Lambda: power the backend logic in a serverless architecture that is lightweight and scalable.
+- DynamoDB: stores equipment and deviation records in a durable NoSQL database.
+- Jest: verifies backend logic through unit tests.
+- Cypress: exercises the app end to end and checks the user workflow.
+- Git: keeps the project versioned and easy to collaborate on.
 
-From the backend folder:
+## How does someone run it?
+1. Install dependencies for the frontend and backend:
+   ```bash
+   cd frontend && npm install
+   cd ../backend && npm install
+   ```
+2. Start the frontend:
+   ```bash
+   cd ../frontend
+   npm run dev
+   ```
+3. In a second terminal, start the backend locally or deploy it with SAM if you want the full API flow.
+4. If you are using the deployed API, set the frontend environment variable:
+   ```bash
+   echo "VITE_API_URL=https://your-api-url" > frontend/.env
+   ```
 
-```bash
-sam build
-sam deploy --guided
-```
-
-Once deployed, include the API key when calling the API locally:
-
-```bash
-curl -H "x-api-key: local-dev-api-key-1234567890" https://<api-id>.execute-api.<region>.amazonaws.com/dev/equipment
-
-Replace <api-id> and <region> with the values from your deployed stack output.
-```
+## Testing
+- Backend unit tests:
+  ```bash
+  cd backend && npm test
+  ```
+- Frontend end-to-end tests:
+  ```bash
+  cd frontend && npx cypress run --spec cypress/e2e/equipment.cy.js
+  ```
 
