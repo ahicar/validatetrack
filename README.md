@@ -1,3 +1,6 @@
+<img width="3456" height="2234" alt="image" src="https://github.com/user-attachments/assets/6e48ede1-83f0-4147-addf-7304a52f1fc9" />
+
+
 # ValidateTrack
 "An equipment qualification and deviation tracker built for FDA-regulated manufacturing environments."
 
