@@ -1,5 +1,8 @@
 <img width="3456" height="2234" alt="image" src="https://github.com/user-attachments/assets/6e48ede1-83f0-4147-addf-7304a52f1fc9" />
 
+<img width="1551" height="792" alt="project_validate track_vite_localhost_success" src="https://github.com/user-attachments/assets/83b32516-92a1-417e-8449-6d2ab2fb57fe" />
+<img width="1074" height="549" alt="project_validate track_aws_success" src="https://github.com/user-attachments/assets/66882554-5a60-475b-b18e-a480548c2135" />
+
 
 # ValidateTrack
 "An equipment qualification and deviation tracker built for FDA-regulated manufacturing environments."
