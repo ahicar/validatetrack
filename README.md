@@ -65,3 +65,63 @@ cd frontend && npm install
 npm run dev
 ```
 
+## Vercel deployment (detailed)
+
+Follow these exact steps to deploy the `frontend` to Vercel and wire it to GitHub Actions.
+
+1) Create a Vercel token
+
+```bash
+# using the Vercel CLI (recommended)
+npm i -g vercel
+vercel login
+vercel tokens create my-token
+# copy the printed token value for the next step
+```
+
+Or create a token in the Vercel dashboard: Account Settings → Tokens → Create Token.
+
+2) (Optional) Get Org (Team) and Project IDs
+
+- In Vercel: Project → Settings → General → Identify to find the **Project ID**.
+- In Vercel: Account or Team → Settings → General → Identify to find the **Team/Org ID**.
+
+You can also fetch these via the API:
+
+```bash
+curl -H "Authorization: Bearer $VERCEL_TOKEN" https://api.vercel.com/v1/projects/<project-name>
+curl -H "Authorization: Bearer $VERCEL_TOKEN" https://api.vercel.com/v1/teams
+```
+
+3) Add GitHub repository secrets
+
+- Go to your GitHub repo → Settings → Secrets and variables → Actions → New repository secret.
+- Add:
+   - `VERCEL_TOKEN` — the token from step 1
+   - `VERCEL_ORG_ID` — (optional) Team/Org ID
+   - `VERCEL_PROJECT_ID` — (optional) Project ID
+
+4) Configure the Vercel project build settings (monorepo / `frontend` subfolder)
+
+- In Vercel Project → Settings → Build & Development Settings:
+   - Root Directory: `frontend`
+   - Install Command: `npm ci`
+   - Build Command: `npm run build`
+   - Output Directory: `dist`
+
+5) Add environment variables in Vercel (production)
+
+- In Vercel Project → Settings → Environment Variables add `VITE_API_URL` and set it to your backend API URL (the URL produced by `sam deploy` or your chosen backend host). Mark it for `Production` and `Preview` as desired.
+
+6) Trigger a deployment
+
+- Push to `main` (Vercel auto-deploys) or run the GitHub Action `Deploy Frontend to Vercel` (Actions → Deploy Frontend to Vercel → Run workflow). The workflow uses the `frontend` folder and the `VERCEL_TOKEN` secret.
+
+7) Confirm the live site
+
+- After the deploy completes, open the Vercel project page to get the production URL (e.g., `https://your-project.vercel.app`).
+
+Notes and security
+- Do NOT commit tokens or IDs into your repository. Use GitHub Secrets as shown above. I updated `.github/workflows/deploy-vercel.yml` to read `VERCEL_TOKEN`, `VERCEL_ORG_ID`, and `VERCEL_PROJECT_ID` from secrets.
+- If you prefer me to add a short section with CLI/API commands to find IDs automatically, tell me and I will add it.
+
