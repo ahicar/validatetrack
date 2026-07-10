@@ -66,3 +66,8 @@ npm run dev
 ```
 
 <img width="1074" height="549" alt="project_ValidateTrack_aws_success" src="https://github.com/user-attachments/assets/89d2ae5f-c256-48be-92cd-4548075d7abe" />
+
+app V1 preview:
+project_validate track_vite_localhost_success
+<img width="1551" height="792" alt="project_validate track_vite_localhost_success" src="https://github.com/user-attachments/assets/553687e6-edbf-48f4-9a18-5c0813adf1d0" />
+
