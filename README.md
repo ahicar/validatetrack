@@ -3,7 +3,7 @@
 # Live demo
 
 Project demo on verceL.
-[ValidateTrack](validatetrack.vercel.app)
+[ValidateTrack](validatetrack.vercel.app "Validatetrack app")
 
 # ValidateTrack
 "An equipment qualification and deviation tracker built for FDA-regulated manufacturing environments."
