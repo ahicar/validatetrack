@@ -24,6 +24,16 @@ I built this instead of a generic CRUD app because it's a close match to what CI
 - Cypress: exercises the app end to end and checks the user workflow.
 - Git: keeps the project versioned and easy to collaborate on.
 
+## App architecture
+ValidateTrack is built as a simple full-stack web app with a clean separation between frontend and backend.
+- Frontend: React components compiled by Vite, running in the browser. It uses `frontend/src/api/client.js` to call the backend API and falls back to local storage when the backend is unavailable.
+- Backend: AWS Lambda functions defined in `backend/template.yaml`, exposed through API Gateway. The backend handles REST-style endpoints for equipment and deviations.
+- Data flow: the frontend sends JSON requests to the API, the backend validates and stores data in DynamoDB, and the response is returned as JSON for the UI to render.
+- Local fallback: the current implementation can default to in-browser storage for equipment and deviation data when API requests fail, enabling a basic offline-like experience.
+
+## Future v2 UI plans
+For v2, the user interface will be improved with a dedicated CSS design and a refactor into separate React components. The goal is to move from a compact proof-of-concept UI into a cleaner, more modular component structure with reusable presentation and form components.
+
 ## How does someone run it?
 1. Deploy the backend (requires an AWS account — see BUILD_GUIDE.md for full setup):
 ```bash

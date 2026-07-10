@@ -83,41 +83,53 @@ export default function App() {
         <div>
             <h1>ValidateTrack</h1>
             <form onSubmit={handleSubmit} noValidate>
-                <div>
+                <label style={{ display: 'block', marginBottom: '0.75rem' }}>
+                    Equipment Name
                     <input
-                        placeholder="Name"
+                        placeholder="e.g. Autoclave Unit 3"
                         value={form.name}
                         onChange={(e) => handleChange('name', e.target.value)}
+                        style={{ display: 'block', width: '100%', marginTop: '0.25rem' }}
                     />
                     {errors.name && <div style={{ color: 'red', fontSize: '0.9rem' }}>{errors.name}</div>}
-                </div>
-                <div>
+                </label>
+
+                <label style={{ display: 'block', marginBottom: '0.75rem' }}>
+                    Location
                     <input
-                        placeholder="Location"
+                        placeholder="e.g. Sterilization Room A"
                         value={form.location}
                         onChange={(e) => handleChange('location', e.target.value)}
+                        style={{ display: 'block', width: '100%', marginTop: '0.25rem' }}
                     />
                     {errors.location && <div style={{ color: 'red', fontSize: '0.9rem' }}>{errors.location}</div>}
-                </div>
-                <div>
+                </label>
+
+                <label style={{ display: 'block', marginBottom: '0.75rem' }}>
+                    Last Calibration Date
                     <input
                         type="date"
                         value={form.lastCalibrationDate}
                         onChange={(e) => handleChange('lastCalibrationDate', e.target.value)}
+                        style={{ display: 'block', marginTop: '0.25rem' }}
                     />
                     {errors.lastCalibrationDate && (
                         <div style={{ color: 'red', fontSize: '0.9rem' }}>{errors.lastCalibrationDate}</div>
                     )}
-                </div>
-                <div>
+                </label>
+
+                <label style={{ display: 'block', marginBottom: '0.75rem' }}>
+                    Next Due Date
                     <input
                         type="date"
                         value={form.nextDueDate}
                         onChange={(e) => handleChange('nextDueDate', e.target.value)}
+                        style={{ display: 'block', marginTop: '0.25rem' }}
                     />
                     {errors.nextDueDate && <div style={{ color: 'red', fontSize: '0.9rem' }}>{errors.nextDueDate}</div>}
-                </div>
-                <button type="submit" disabled={!isFormValid}>Save</button>
+                </label>
+
+                <button type="submit" disabled={!isFormValid}>Save Equipment</button>
                 {submitError && <div style={{ color: 'red', marginTop: '0.75rem' }}>{submitError}</div>}
             </form>
             <ul>
